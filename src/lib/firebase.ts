@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { getFirestore, doc, getDocFromServer, collection, onSnapshot, query, where, orderBy, limit, setDoc, addDoc, updateDoc, deleteDoc, getDocs, getDoc } from 'firebase/firestore';
 // Firebase configuration
-// Prioritize environment variables for flexibility
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -13,8 +12,20 @@ const firebaseConfig = {
   firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID
 };
 
-// Initialize Firebase SDK
-const app = initializeApp(firebaseConfig);
+// Validate config
+if (!firebaseConfig.apiKey) {
+  console.error("Firebase API Key is missing! Ensure VITE_FIREBASE_API_KEY is set in your environment variables.");
+}
+
+// Initialize Firebase SDK with safety check
+let app;
+try {
+  app = initializeApp(firebaseConfig);
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+  // Fallback to a dummy object to prevent top-level crashes
+  app = { name: "fallback" } as any;
+}
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
