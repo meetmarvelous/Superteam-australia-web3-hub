@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public profile for Superteam Australia members.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string", "description": "Full name" },
+        "role": { "type": "string", "description": "Primary role (e.g., Developer, Designer)" },
+        "skills": { "type": "array", "items": { "type": "string" }, "description": "List of skills" },
+        "avatar": { "type": "string", "description": "Profile picture URL" },
+        "twitter": { "type": "string", "description": "Twitter/X handle" },
+        "github": { "type": "string", "description": "GitHub handle" },
+        "company": { "type": "string", "description": "Current company or project" },
+        "isCore": { "type": "boolean", "description": "Whether they are a core contributor" },
+        "bio": { "type": "string", "description": "Short biography" }
+      },
+      "required": ["uid", "name", "role"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "Solana ecosystem event in Australia.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "location": { "type": "string" },
+        "lumaUrl": { "type": "string" },
+        "image": { "type": "string" },
+        "type": { "type": "string", "enum": ["upcoming", "past"] }
+      },
+      "required": ["title", "date", "location", "lumaUrl", "type"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Solana ecosystem project or partner.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "logo": { "type": "string" },
+        "url": { "type": "string" }
+      },
+      "required": ["name", "logo", "url"]
+    },
+    "Application": {
+      "title": "Onboarding Application",
+      "description": "Application to join Superteam Australia.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "location": { "type": "string" },
+        "role": { "type": "string" },
+        "skills": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "email", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles collection."
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Ecosystem events collection."
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Ecosystem projects collection."
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Onboarding applications collection."
+    }
+  }
+}
