@@ -13,22 +13,46 @@ const firebaseConfig = {
 };
 
 // Validate config
-if (!firebaseConfig.apiKey) {
-  console.error("Firebase API Key is missing! Ensure VITE_FIREBASE_API_KEY is set in your environment variables.");
+const isConfigValid = !!firebaseConfig.apiKey;
+
+if (!isConfigValid) {
+  console.warn("⚠️ Firebase API Key is missing! Silicon Hub is running in 'Resilient Mock Mode'. Please set VITE_FIREBASE_API_KEY in environment variables for live features.");
 }
 
 // Initialize Firebase SDK with safety check
-let app;
-try {
-  app = initializeApp(firebaseConfig);
-} catch (error) {
-  console.error("Firebase initialization failed:", error);
-  // Fallback to a dummy object to prevent top-level crashes
-  app = { name: "fallback" } as any;
+let app: any;
+let db: any;
+let auth: any;
+const googleProvider = new GoogleAuthProvider();
+
+if (isConfigValid) {
+  try {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+    auth = getAuth(app);
+  } catch (error) {
+    console.error("Firebase initialization failed:", error);
+  }
 }
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+
+// If initialization failed or config is missing, provide mock versions
+if (!app || !db || !auth) {
+  db = { 
+    type: 'mock',
+    collection: () => ({ doc: () => ({}) }),
+    doc: () => ({})
+  } as any;
+  auth = { 
+    currentUser: null,
+    signOut: async () => {},
+    onAuthStateChanged: (cb: any) => {
+      cb(null);
+      return () => {};
+    }
+  } as any;
+}
+
+export { db, auth, googleProvider };
 
 // Error Handling
 export enum OperationType {
