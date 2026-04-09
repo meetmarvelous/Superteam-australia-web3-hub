@@ -53,6 +53,17 @@ The app will be available at `http://localhost:3000`.
 
 ---
 
+## 🌐 Deployment (Vercel)
+
+This project is optimized for deployment on **Vercel**:
+
+1. **Connect your GitHub Repo**: Import this repository into Vercel.
+2. **Configure Environment Variables**: Add all the variables from your `.env` file to the Vercel project settings (**Settings > Environment Variables**).
+3. **Build Settings**: Vercel will automatically detect Vite and use `npm run build` with the `dist` output directory.
+4. **Custom Domains**: Add your custom domain and ensure the URL is added to your **Firebase Console > Authentication > Settings > Authorized Domains**.
+
+---
+
 ## 🎨 Design System
 
 The project follows a **Premium Light Theme** aesthetic:
