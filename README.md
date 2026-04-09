@@ -1,28 +1,37 @@
-# Superteam Australia Web3 Hub
+# 🦘 Superteam Australia Web3 Hub
 
-A premium, world-class directory and ecosystem hub for Superteam Australia, built with React, Vite, Tailwind CSS 4, and Firebase.
+A premium, world-class directory and ecosystem hub for the **Superteam Australia** community. Built with a "Local-First" architecture using React 19, Vite 6, Tailwind CSS 4, and Firebase.
 
-## 🚀 Getting Started
+![Superteam AU](https://picsum.photos/seed/vibrant-australia/1200/400)
 
-### 1. Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+## ✨ Key Features
 
-### 2. Installation
+- **🏆 Talent Directory**: A searchable, high-fidelity showcase of the best builders in the AU Solana ecosystem.
+- **📅 Events Hub**: Stay updated with local Luma events and workshops.
+- **🔐 Firebase Auth**: Secure Google authentication integrated directly into the onboarding flow.
+- **💎 Premium UI**: Editorial-grade design featuring glassmorphism, mesh gradients, and Geist typography.
+- **🛠 Universal Config**: Zero-hardcoding architecture. All social links and Firebase credentials managed via `.env`.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Installation
 ```bash
 npm install
 ```
 
-### 3. Environment Setup
-Create a `.env` file in the root directory and add your credentials:
+### 2. Environment Setup
+Create a `.env` file in the root directory. You can use `.env.example` as a template:
+```bash
+cp .env.example .env
+```
+*Note: Ensure you fill in your Firebase credentials in the `.env` file.*
 
-```env
-# Firebase Configuration (See FIREBASE_SETUP.md for details)
-# These are already configured in firebase-applet-config.json, 
-# but you can move them here if you prefer using import.meta.env
-
-# Gemini AI API Key (Required for AI features)
-GEMINI_API_KEY=your_gemini_api_key_here
+### 3. Database Seeding
+To populate your local Firestore with initial projects and members:
+```bash
+npm run seed
 ```
 
 ### 4. Running Locally
@@ -35,23 +44,12 @@ The app will be available at `http://localhost:3000`.
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React 19, Vite 6
-- **Styling:** Tailwind CSS 4 (using the new Vite plugin architecture)
+- **Framework:** React 19 + Vite 6
+- **Styling:** Tailwind CSS 4 (Vite plugin architecture)
 - **Animations:** Framer Motion (`motion/react`)
-- **Icons:** Lucide React
 - **Backend:** Firebase (Auth & Firestore)
 - **Typography:** Geist Variable Font
-
----
-
-## 📂 Project Structure
-
-- `src/components/`: Reusable UI components (Navbar, Footer, GlassCard, etc.)
-- `src/context/`: React Context providers (e.g., `AuthContext.tsx`)
-- `src/lib/`: Utility functions and service initializations (`firebase.ts`, `utils.ts`)
-- `src/types/`: TypeScript interfaces and types
-- `src/index.css`: Global styles and Tailwind 4 configuration
-- `vite.config.ts`: Vite configuration with path aliases and environment handling
+- **Icons:** Lucide React
 
 ---
 
@@ -60,35 +58,24 @@ The app will be available at `http://localhost:3000`.
 The project follows a **Premium Light Theme** aesthetic:
 - **Background:** `#FAF9F6` (Off-white)
 - **Primary:** `#D4AF37` (Ochre Gold)
-- **Typography:** Geist Sans (Editorial style)
-- **Effects:** Glassmorphism with subtle internal strokes and soft shadows.
+- **Typography:** Geist Sans (Editorial / Luxury style)
+- **Effects:** Glassmorphism with subtle internal strokes and soft 3D shadows.
 
 ---
 
-## 🧩 UI Components (shadcn/ui)
+## 🔐 Firebase & Deployment
 
-This project uses **shadcn/ui** for high-quality, accessible components.
-- **Configuration:** `components.json`
-- **Location:** `src/components/ui/`
-- **Utility:** `src/lib/utils.ts` (contains the `cn()` helper)
-
-To add more components locally:
-```bash
-npx shadcn@latest add [component-name]
-```
-
----
-
-## 🔐 Security & Database
-
-For detailed instructions on setting up your Firestore database, security rules, and authentication, please refer to:
+For detailed instructions on setting up your Firestore database, security rules, and authentication providers, please refer to:
 👉 **[FIREBASE_SETUP.md](./FIREBASE_SETUP.md)**
 
 ---
 
-## 📦 Building for Production
+## 📂 Developer Resources
 
-```bash
-npm run build
-```
-The production-ready files will be generated in the `dist/` folder.
+- `MASTER_PROMPT.txt`: Contains the "Ultimate Local-Ready" prompt for future AI Studio sessions.
+- `scripts/seed.ts`: The data population logic for Firestore.
+- `src/lib/config.ts`: The central configuration service for environment variables.
+
+---
+
+© 2026 Superteam Australia. Built for the Solana Renaissance.
